@@ -10,7 +10,7 @@ typedef struct s_philo
 	long long		last_meal_time;
     int             number_of_times_to_eat;
     int             is_dead;
-	int				forks;//0 1 2
+	int				forks;
 	pthread_t		thread;
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	*protection_mutex;

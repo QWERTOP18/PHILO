@@ -2,10 +2,16 @@
 #define SYSTEM_H
 
 #include <pthread.h>
+#include <stdlib.h>
+
+
 #include "philo.h"
-#include "utils.h"
 #include "color.h"
 
+
+#define E_ALLOCATE 1
+#define E_ARGS 2
+#define E_FILE_READ 3
 
 
 typedef struct s_sys
@@ -15,7 +21,7 @@ typedef struct s_sys
     int time_to_eat;
     int time_to_sleep;
     t_philo **philos;
-    int *number_of_times_each_philosopher_must_eat;
+    int number_of_times_each_philosopher_must_eat;
     long long born_time;
 } t_sys;
 // number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
@@ -25,6 +31,10 @@ typedef struct s_sys
 // ◦ time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
 // ◦ number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
 
+
+void system_exit(t_sys *sys, int status);
+
+t_sys *system_init(int argc, char **argv);
 
 #endif
 

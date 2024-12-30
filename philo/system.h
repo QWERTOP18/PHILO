@@ -4,8 +4,6 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-
-#include "philo.h"
 #include "color.h"
 
 
@@ -14,16 +12,39 @@
 #define E_FILE_READ 3
 
 
+
+
+//todo pthreadに渡せるのはvoid*だけ
+//mapでもできるけどどうせだったら作り直す
+typedef struct s_philo
+{
+	int				id;
+	long long		last_meal_time;
+    int             number_of_times_to_eat;
+	pthread_t		thread;
+    pthread_mutex_t    fork;
+	
+}	t_philo;
+
 typedef struct s_sys
 {
     int number_of_philosophers;
     int time_to_die;
     int time_to_eat;
     int time_to_sleep;
-    t_philo **philos;
     int number_of_times_each_philosopher_must_eat;
-    long long born_time;
+    t_philo **philos;
+    long long start_time;
+    pthread_mutex_t	log;
 } t_sys;
+
+typedef struct s_map
+{
+    int id;
+    t_sys *sys;
+} t_map;
+
+
 // number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
 // ◦ number_of_philosophers: The number of philosophers and also the number of forks.
 // ◦ time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the sim- ulation, they die.
@@ -35,6 +56,17 @@ typedef struct s_sys
 void system_exit(t_sys *sys, int status);
 
 t_sys *system_init(int argc, char **argv);
+
+
+
+
+void	praying(int id, t_sys *sys);
+void	eating(int id, t_sys *sys);
+
+void	sleeping(int id, t_sys *sys);
+
+void	thinking(int id, t_sys *sys);
+
 
 #endif
 

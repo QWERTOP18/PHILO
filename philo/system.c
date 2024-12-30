@@ -24,24 +24,24 @@ void system_exit(t_sys *sys, int status)
     exit(status);
 }
 
-void give_birth(int num, t_sys *sys)
+void philo_init(int num, t_sys *sys)
 {
     sys->philos = malloc(sizeof(t_philo *) * (num+1));
+    t_philo *philo;
     memset(sys->philos, 0, sizeof(t_philo *) * (num+1));
     int i;
     i = 0;
     while (i < num)
     {
-        sys->philos[i] = (t_philo *)malloc(sizeof(t_philo));
+        
+        philo = (t_philo *)malloc(sizeof(t_philo));
         if (!sys->philos[i])
             system_exit(sys, 1);
-        sys->philos[i]->id = i;
-       // sys->philos[i]->last_meal_time = (long long *)malloc(sizeof(long long));
-        sys->philos[i]->last_meal_time = sys->born_time;
-        sys->philos[i]->number_of_times_to_eat = 0;
-        sys->philos[i]->is_dead = 0;
-        sys->philos[i]->forks = (i + 1) % num;
-        i++;
+        philo->id = i;
+        philo->last_meal_time = sys->start_time;
+        philo->number_of_times_to_eat = 0;
+        pthread_mutex_init(&philo->fork,NULL);
+        sys->philos[i++] = philo;
     }
 }
 
@@ -50,18 +50,19 @@ t_sys *system_init(int argc, char **argv)
     t_sys *sys;
 
     sys = NULL;
-    if (argc != 5 && argc != 6)
-        system_exit(sys, E_ARGS);
+
     sys = (t_sys *)malloc(sizeof(t_sys));
     if (!sys)
         system_exit(sys, E_ALLOCATE);
     memset(sys, 0, sizeof(t_sys));
     sys->number_of_philosophers = fetch_number(*++argv,sys);
+    if (sys->number_of_philosophers == 0)
+        system_exit(sys, E_ALLOCATE);
     sys->time_to_die = fetch_number(*++argv,sys);
     sys->time_to_eat = fetch_number(*++argv,sys);
     sys->time_to_sleep = fetch_number(*++argv,sys);
     if (*++argv)
         sys->number_of_times_each_philosopher_must_eat = fetch_number(*argv,sys);
-    give_birth(sys->number_of_philosophers,sys);
+    philo_init(sys->number_of_philosophers,sys);
     return sys;
 }

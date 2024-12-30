@@ -33,3 +33,13 @@ long long	fetch_time(void)
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
+
+
+
+void    philo_log(int id, const char *msg, t_sys *sys)
+{
+    long long    time;
+
+    time = ft_get_time() - sys->start_time;
+    printf("%lld\t%d\t%s\n", time, id, msg);
+}

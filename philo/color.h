@@ -1,7 +1,6 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-// フォアグラウンド色
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -11,7 +10,7 @@
 #define CYAN    "\033[36m"
 #define WHITE   "\033[37m"
 
-// 背景色
+
 #define BG_RED     "\033[41m"
 #define BG_GREEN   "\033[42m"
 #define BG_YELLOW  "\033[43m"
@@ -20,11 +19,12 @@
 #define BG_CYAN    "\033[46m"
 #define BG_WHITE   "\033[47m"
 
-// テキストスタイル
-#define BOLD       "\033[1m"  // 太字
-#define UNDERLINE  "\033[4m"  // 下線
-#define BLINK      "\033[5m"  // 点滅
-#define REVERSED   "\033[7m"  // 反転
-#define HIDDEN     "\033[8m"  // 隠し文字
+
+#define BOLD       "\033[1m"  
+
+#define UNDERLINE  "\033[4m"
+#define BLINK      "\033[5m"
+#define REVERSED   "\033[7m"
+#define HIDDEN     "\033[8m"
 
 #endif

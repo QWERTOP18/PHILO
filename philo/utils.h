@@ -7,4 +7,7 @@ int	fetch_number(const char *str, t_sys *sys);
 
 long long	fetch_time(void);
 
+
+void    philo_log(int id, const char *msg, t_sys *sys);
+
 #endif

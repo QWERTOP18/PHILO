@@ -11,7 +11,7 @@ CYAN    =  \033[36m
 WHITE   =  \033[37m
 RESET   =  \033[0m
 
-SRC     =  daemon.c loops.c main.c system.c utils.c
+SRC     =  daemon.c loop.c main.c system.c utils.c
 OBJ     =  $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
@@ -40,6 +40,7 @@ re: fclean all
 all: credit $(NAME)
 
 credit:
+
 	@echo 'Try'
 	@echo "Marry()"
 	@echo "If you marry a good wife,"

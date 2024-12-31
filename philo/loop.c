@@ -3,6 +3,26 @@
 #include "system.h"
 #include "utils.h"
 
+void	praying(int id, t_sys *sys);
+void	eating(int id, t_sys *sys);
+void	sleeping(int id, t_sys *sys);
+void	thinking(int id, t_sys *sys);
+
+void	*__loop(void *void_map)
+{
+	t_map *map = (t_map *)void_map;
+	// if (map->id % 2 == 0)
+	// 	usleep(10);
+	while (1)
+	{
+		praying(map->id, map->sys);
+        eating(map->id, map->sys);
+        sleeping(map->id, map->sys);
+        thinking(map->id, map->sys);
+	}
+    return NULL;
+}
+
 
 /* actuary they look for two mutex_forks */
 void	praying(int id, t_sys *sys)
@@ -44,3 +64,4 @@ void	thinking(int id, t_sys *sys)
 	philo_log(id+1, "is thinking",sys);
 	pthread_mutex_unlock(&sys->mutex_log);
 }
+

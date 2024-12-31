@@ -2,9 +2,27 @@
 #include "utils.h"
 #include "color.h"
 
+
+
+int check_is_dead(t_sys *sys);
+int check_is_satisfy(t_sys *sys);
+
+
+void   *__daemon(void *void_sys)
+{
+    t_sys *sys = (t_sys *)void_sys;
+    while (1)
+    {
+        if (check_is_satisfy(sys))
+            return NULL;
+        if (check_is_dead(sys))
+            return NULL;
+    }
+}
+
+
 int check_is_satisfy(t_sys *sys)
 {
-    //argcが5なら0でreturn
     int i = 0;
     while (i < sys->number_of_philosophers)
     {
@@ -41,5 +59,4 @@ int check_is_dead(t_sys *sys)
     }
     return 0;
 }
-
 

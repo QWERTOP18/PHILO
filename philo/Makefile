@@ -1,12 +1,8 @@
 
 
-#cc -fsanitize=thread
-
-
-
 NAME    =  ./philo
 
-FLAGS   =  -Wall -Wextra -Werror
+FLAGS   =  -Wall -Wextra -fsanitize=thread#-Werror
 
 
 RED     =  \033[31m
@@ -22,22 +18,47 @@ RESET   =  \033[0m
 
 SRC = daemon.c loops.c main.c system.c utils.c 
 
+OBJ     =  $(SRC:.c=.o)
+
+$(NAME): $(OBJ)
+	@echo "$(CYAN)Compiling $(NAME)...$(RESET)"
+	$(CC) $(OBJ) -o $(NAME) $(FLAGS)
+	@echo "$(GREEN)Compilation complete!$(RESET)"
+
+%.o: %.c
+	@echo "$(YELLOW)Compiling $<...$(RESET)"
+	$(CC) -c $< -o $@ $(FLAGS)
 
 
+run: $(NAME)
+	@echo "$(BLUE)Running $(NAME)...$(RESET)"
+	./$(NAME) 2 2 2 2 2
+
+clean:
+	@echo "$(MAGENTA)Cleaning up object files...$(RESET)"
+	rm -f $(OBJ)
+
+fclean: clean
+	@echo "$(MAGENTA)Cleaning up executable...$(RESET)"
+	rm -f $(NAME)
+
+re: fclean all
+
+all: credit $(NAME)
 
 
+credit:
+	echo 'try'
+	echo "Marry()"
+	echo "if you marry a good wife"
+	echo "you will be happy"
+	echo "if a bad wife"
+	echo "you will become a"
+	echo ""
+	sleep(1)
+	echo ""
+	echo "philosopher"
 
-echo 'try'
-echo "Marry()"
-echo "if you marry a good wife"
-echo "you will be happy"
-echo "if a bad wife"
-echo "you will become a"
-echo ""
-sleep(1)
-echo ""
-echo "philosopher"
-
-echo 'except SpouseNotFound'
-echo 'you shall be a'
-echo "Hacker!"
+	echo 'except SpouseNotFound'
+	echo 'you shall be a'
+	echo "Hacker!"

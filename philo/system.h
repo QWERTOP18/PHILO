@@ -2,9 +2,14 @@
 #define SYSTEM_H
 
 #include <pthread.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <errno.h>
+#include <time.h>
 #include <stdlib.h>
 
 #include "color.h"
+
 
 
 #define E_ALLOCATE 1
@@ -12,30 +17,26 @@
 #define E_FILE_READ 3
 
 
-
-
-//todo pthreadに渡せるのはvoid*だけ
-//mapでもできるけどどうせだったら作り直す
 typedef struct s_philo
 {
-	int				id;
+	// int				id;
 	long long		last_meal_time;
     int             number_of_times_to_eat;
 	pthread_t		thread;
-    pthread_mutex_t    fork;
+    pthread_mutex_t    mutex_fork;
 	
 }	t_philo;
 
 typedef struct s_sys
 {
+    t_philo        **philos;
     int number_of_philosophers;
     int time_to_die;
     int time_to_eat;
     int time_to_sleep;
     int number_of_times_each_philosopher_must_eat;
-    t_philo **philos;
     long long start_time;
-    pthread_mutex_t	log;
+    pthread_mutex_t	mutex_log;
 } t_sys;
 
 typedef struct s_map
@@ -43,6 +44,7 @@ typedef struct s_map
     int id;
     t_sys *sys;
 } t_map;
+
 
 
 // number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]

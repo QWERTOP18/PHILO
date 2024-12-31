@@ -37,10 +37,9 @@ void philo_init(int num, t_sys *sys)
         philo = (t_philo *)malloc(sizeof(t_philo));
         if (!sys->philos[i])
             system_exit(sys, 1);
-        philo->id = i;
         philo->last_meal_time = sys->start_time;
         philo->number_of_times_to_eat = 0;
-        pthread_mutex_init(&philo->fork,NULL);
+        pthread_mutex_init(&philo->mutex_fork,NULL);
         sys->philos[i++] = philo;
     }
 }

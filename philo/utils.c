@@ -40,6 +40,6 @@ void    philo_log(int id, const char *msg, t_sys *sys)
 {
     long long    time;
 
-    time = ft_get_time() - sys->start_time;
+    time = fetch_time() - sys->start_time;
     printf("%lld\t%d\t%s\n", time, id, msg);
 }

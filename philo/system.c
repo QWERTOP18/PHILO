@@ -1,24 +1,25 @@
 #include "system.h"
 #include "utils.h"
 #include <string.h>
+#include <limits.h>
 
 
 
 void system_exit(t_sys *sys, int status)
 {
-    int i = 0;
-    if (sys && sys->philos)
-    {
-        while (sys->philos[i])
-        {
-            free(sys->philos[i]);
-            sys->philos[i] = NULL;
-            i++;
-        }
-        free(sys->philos);
-        sys->philos = NULL;
-    }
-    free(sys);
+    // int i = 0;
+    // if (sys && sys->philos)
+    // {
+    //     while (sys->philos[i])
+    //     {
+    //         free(sys->philos[i]);
+    //         sys->philos[i] = NULL;
+    //         i++;
+    //     }
+    //     free(sys->philos);
+    //     sys->philos = NULL;
+    // }
+    // free(sys);
     if(status)
         printf("Error\n");
     exit(status);
@@ -72,6 +73,15 @@ t_sys *system_init(int argc, char **argv)
     sys->time_to_sleep = fetch_number(*++argv,sys);
     if (*++argv)
         sys->number_of_times_each_philosopher_must_eat = fetch_number(*argv,sys);
+    else
+        sys->number_of_times_each_philosopher_must_eat = INT_MAX;
+
+    #ifdef LOG
+    printf("die%d eat%d sleep%d timeeat%d\n",sys->time_to_die, sys->time_to_eat, sys->time_to_sleep,sys->number_of_times_each_philosopher_must_eat);
+    #endif
+
+    
+    sys->start_time = fetch_time();
     philo_init(sys->number_of_philosophers,sys);
     pthread_mutex_init(&sys->mutex_log, NULL);
 

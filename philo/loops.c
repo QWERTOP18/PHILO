@@ -25,7 +25,7 @@ void	eating(int id, t_sys *sys)
 	sys->philos[id]->last_meal_time = fetch_time();
 	sys->philos[id]->number_of_times_to_eat++;
 	pthread_mutex_unlock(&sys->mutex_log);
-	usleep(sys->time_to_eat);
+	well_sleep(sys->time_to_eat);
 	pthread_mutex_unlock(&sys->philos[id]->mutex_fork);
 	pthread_mutex_unlock(&sys->philos[nid]->mutex_fork);
 }
@@ -35,7 +35,7 @@ void	sleeping(int id, t_sys *sys)
 	pthread_mutex_lock(&sys->mutex_log);
 	philo_log(id+1, "is sleeping",sys);
 	pthread_mutex_unlock(&sys->mutex_log);
-	usleep(sys->time_to_sleep);
+	well_sleep(sys->time_to_sleep);
 }
 
 void	thinking(int id, t_sys *sys)

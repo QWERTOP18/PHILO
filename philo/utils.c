@@ -34,12 +34,19 @@ long long	fetch_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-
-
 void    philo_log(int id, const char *msg, t_sys *sys)
 {
     long long    time;
 
     time = fetch_time() - sys->start_time;
     printf("%lld\t%d\t%s\n", time, id, msg);
+}
+
+void well_sleep(int time)
+{
+    long long    start_time;
+
+    start_time = fetch_time();
+    while (fetch_time() - start_time < time)
+        usleep(100);
 }

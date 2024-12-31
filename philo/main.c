@@ -29,6 +29,10 @@ int main(int argc, char **argv)
     t_map *map = malloc(sizeof(t_map) * sys->number_of_philosophers);
 
     // Start the simulation
+
+     #ifdef LOG
+    printf("main simulation\n");
+    #endif
     int i = 0;
     while (i < sys->number_of_philosophers)
     {

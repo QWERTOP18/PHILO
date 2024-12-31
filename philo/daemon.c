@@ -1,4 +1,6 @@
-#include "system.c"
+#include "system.h"
+#include "utils.h"
+
 
 int check_is_satisfy(t_sys *sys)
 {
@@ -41,4 +43,5 @@ int check_is_dead(t_sys *sys)
     return 0;
     
 }
+
 

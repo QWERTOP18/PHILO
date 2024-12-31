@@ -46,6 +46,10 @@ void philo_init(int num, t_sys *sys)
 
 t_sys *system_init(int argc, char **argv)
 {
+    #ifdef LOG
+    printf("%s\n",__func__);
+    #endif
+
     t_sys *sys;
 
     sys = NULL;
@@ -63,5 +67,11 @@ t_sys *system_init(int argc, char **argv)
     if (*++argv)
         sys->number_of_times_each_philosopher_must_eat = fetch_number(*argv,sys);
     philo_init(sys->number_of_philosophers,sys);
+
+
+
+    #ifdef LOG
+    printf("%s done\n",__func__);
+    #endif
     return sys;
 }

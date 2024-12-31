@@ -1,9 +1,6 @@
-
-
 NAME    =  ./philo
-
-FLAGS   =  -Wall -Wextra -fsanitize=thread#-Werror
-
+CC      =  cc
+FLAGS   =  -Wall -Wextra -fsanitize=thread
 
 RED     =  \033[31m
 GREEN   =  \033[32m
@@ -14,10 +11,7 @@ CYAN    =  \033[36m
 WHITE   =  \033[37m
 RESET   =  \033[0m
 
-
-
-SRC = daemon.c loops.c main.c system.c utils.c 
-
+SRC     =  daemon.c loops.c main.c system.c utils.c
 OBJ     =  $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
@@ -28,7 +22,6 @@ $(NAME): $(OBJ)
 %.o: %.c
 	@echo "$(YELLOW)Compiling $<...$(RESET)"
 	$(CC) -c $< -o $@ $(FLAGS)
-
 
 run: $(NAME)
 	@echo "$(BLUE)Running $(NAME)...$(RESET)"
@@ -46,19 +39,18 @@ re: fclean all
 
 all: credit $(NAME)
 
-
 credit:
-	echo 'try'
-	echo "Marry()"
-	echo "if you marry a good wife"
-	echo "you will be happy"
-	echo "if a bad wife"
-	echo "you will become a"
-	echo ""
-	sleep(1)
-	echo ""
-	echo "philosopher"
-
-	echo 'except SpouseNotFound'
-	echo 'you shall be a'
-	echo "Hacker!"
+	@echo 'Try'
+	@echo "Marry()"
+	@echo "If you marry a good wife,"
+	@echo "you will be happy."
+	@echo "If a bad wife,"
+	@echo "you will become a"
+	@echo ""
+	@echo "philosopher"
+	@echo ""
+	@sleep 1
+	@echo ""
+	@echo "except SpouseNotFound"
+	@echo "you shall be a"
+	@echo "Hacker!"

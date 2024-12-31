@@ -73,7 +73,7 @@ t_sys *system_init(int argc, char **argv)
     if (*++argv)
         sys->number_of_times_each_philosopher_must_eat = fetch_number(*argv,sys);
     philo_init(sys->number_of_philosophers,sys);
-
+    pthread_mutex_init(&sys->mutex_log, NULL);
 
 
     #ifdef LOG

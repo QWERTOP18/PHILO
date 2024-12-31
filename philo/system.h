@@ -70,5 +70,9 @@ void	sleeping(int id, t_sys *sys);
 void	thinking(int id, t_sys *sys);
 
 
+int check_is_dead(t_sys *sys);
+
+int check_is_satisfy(t_sys *sys);
+
 #endif
 

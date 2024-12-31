@@ -2,7 +2,7 @@
 
 
 
-void	*loop(void *void_map)
+void	*__loop(void *void_map)
 {
 	t_map *map = (t_map *)void_map;
 	if (map->id % 2 == 0)
@@ -15,6 +15,19 @@ void	*loop(void *void_map)
         sleeping(map->id, map->sys);
         thinking(map->id, map->sys);
 	}
+    return NULL;
+}
+
+void   *__daemon(void *void_sys)
+{
+    t_sys *sys = (t_sys *)void_sys;
+    while (1)
+    {
+        if (check_is_satisfy(sys))
+            return NULL;
+        if (check_is_dead(sys))
+            return NULL;
+    }
 }
 
 
@@ -38,13 +51,13 @@ int main(int argc, char **argv)
     {
         map[i].id = i;
         map[i].sys = sys;
-        pthread_create(&sys->philos[i]->thread, NULL, loop, &map[i]);
+        pthread_create(&sys->philos[i]->thread, NULL, __loop, &map[i]);
         // pthread_detach(&sys->philos[i]->thread);
         i++;
     }
 
-    //...
-    // Wait for the simulation to finish
+    pthread_t daemon_thread;
+    pthread_create(&daemon_thread, NULL, __daemon, sys);
     i = 0;
     while (i < sys->number_of_philosophers)
     {
@@ -53,4 +66,5 @@ int main(int argc, char **argv)
     }
     free(map);
     system_exit(sys, 0);
+    return 0;
 }

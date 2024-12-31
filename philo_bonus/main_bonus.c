@@ -1,6 +1,4 @@
-#include "system.h"
-
-
+#include "system_bonus.h"
 
 
 int main(int argc, char **argv)
@@ -23,7 +21,6 @@ int main(int argc, char **argv)
     {
         map[i].id = i;
         map[i].sys = sys;
-        //startt_timeはここに設定する方が良いか　todo
         pthread_create(&sys->philos[i]->thread, NULL, __loop, &map[i]);
         pthread_detach(sys->philos[i]->thread);
         i++;

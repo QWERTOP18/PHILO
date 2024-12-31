@@ -4,10 +4,10 @@
 
 void	*loop(void *void_map)
 {
-
 	t_map *map = (t_map *)void_map;
 	if (map->id % 2 == 0)
 		usleep(10);
+    printf("id = %d\n",map->id);
 	while (1)
 	{
 		praying(map->id, map->sys);
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     {
         map[i].id = i;
         map[i].sys = sys;
-        pthread_create(&sys->philos[i]->thread, NULL, loop, map);
+        pthread_create(&sys->philos[i]->thread, NULL, loop, &map[i]);
         // pthread_detach(&sys->philos[i]->thread);
         i++;
     }

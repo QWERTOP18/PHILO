@@ -26,6 +26,9 @@ void system_exit(t_sys *sys, int status)
 
 void philo_init(int num, t_sys *sys)
 {
+    #ifdef LOG
+    printf("%s\n",__func__);
+    #endif
     sys->philos = malloc(sizeof(t_philo *) * (num+1));
     t_philo *philo;
     memset(sys->philos, 0, sizeof(t_philo *) * (num+1));
@@ -35,13 +38,16 @@ void philo_init(int num, t_sys *sys)
     {
         
         philo = (t_philo *)malloc(sizeof(t_philo));
-        if (!sys->philos[i])
+        if (!philo)
             system_exit(sys, 1);
         philo->last_meal_time = sys->start_time;
         philo->number_of_times_to_eat = 0;
         pthread_mutex_init(&philo->mutex_fork,NULL);
         sys->philos[i++] = philo;
     }
+     #ifdef LOG
+    printf("%s done\n",__func__);
+    #endif
 }
 
 t_sys *system_init(int argc, char **argv)

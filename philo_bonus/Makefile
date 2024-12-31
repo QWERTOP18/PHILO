@@ -1,4 +1,4 @@
-NAME    =  ./philo
+NAME    =  ./philo_bonus
 CC      =  cc
 FLAGS   =  -Wall -Wextra -fsanitize=thread
 
@@ -11,7 +11,7 @@ CYAN    =  \033[36m
 WHITE   =  \033[37m
 RESET   =  \033[0m
 
-SRC     =  daemon.c loop.c main.c system.c utils.c
+SRC     =  daemon_bonus.c loop_bonus.c main_bonus.c system_bonus.c utils_bonus.c
 OBJ     =  $(SRC:.c=.o)
 
 $(NAME): $(OBJ)

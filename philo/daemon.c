@@ -47,7 +47,7 @@ int check_is_dead(t_sys *sys)
     {
         pthread_mutex_lock(&sys->mutex_log);
         elapsed_time = fetch_time() - sys->philos[i]->last_meal_time;
-        if (elapsed_time > sys->time_to_die)
+        if (elapsed_time >= sys->time_to_die)
         {
             printf(BG_RED);
             philo_log(i+1, "died", sys);

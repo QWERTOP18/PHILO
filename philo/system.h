@@ -28,7 +28,7 @@ typedef struct s_philo
 
 typedef struct s_sys
 {
-    t_philo        **philos;
+    t_philo        *philos;
     int number_of_philosophers;
     int time_to_die;
     int time_to_eat;
@@ -47,7 +47,7 @@ typedef struct s_map
 
 
 void system_exit(t_sys *sys, int status);
-t_sys *system_init(int argc, char **argv);
+t_sys *system_init(char **argv);
 
 void   *__daemon(void *void_sys);
 

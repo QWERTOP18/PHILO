@@ -27,7 +27,7 @@ int check_is_satisfy(t_sys *sys)
     while (i < sys->number_of_philosophers)
     {
         pthread_mutex_lock(&sys->mutex_log);
-        if (sys->philos[i]->number_of_times_to_eat < sys->number_of_times_each_philosopher_must_eat)
+        if (sys->philos[i].number_of_times_to_eat < sys->number_of_times_each_philosopher_must_eat)
         {
             pthread_mutex_unlock(&sys->mutex_log);
             return 0;
@@ -46,7 +46,7 @@ int check_is_dead(t_sys *sys)
     while (i < sys->number_of_philosophers)
     {
         pthread_mutex_lock(&sys->mutex_log);
-        elapsed_time = fetch_time() - sys->philos[i]->last_meal_time;
+        elapsed_time = fetch_time() - sys->philos[i].last_meal_time;
         if (elapsed_time >= sys->time_to_die)
         {
             printf(BG_RED);

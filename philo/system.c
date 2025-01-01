@@ -28,24 +28,23 @@ void system_exit(t_sys *sys, int status)
 
 void philo_init(int num, t_sys *sys)
 {
-    sys->philos = malloc(sizeof(t_philo *) * (num+1));
-    t_philo *philo;
-    memset(sys->philos, 0, sizeof(t_philo *) * (num+1));
+    sys->philos = malloc(sizeof(t_philo) * (num+1));
+    if (!sys->philos)
+        system_exit(sys, 1);
+    memset(sys->philos, 0, sizeof(t_philo) * (num+1));
     int i;
     i = 0;
     while (i < num)
     {
-        philo = (t_philo *)malloc(sizeof(t_philo));
-        if (!philo)
-            system_exit(sys, 1);
-        philo->last_meal_time = sys->start_time;
-        philo->number_of_times_to_eat = 0;
-        pthread_mutex_init(&philo->mutex_fork,NULL);
-        sys->philos[i++] = philo;
+        
+        sys->philos[i].last_meal_time = sys->start_time;
+        sys->philos[i].number_of_times_to_eat = 0;
+        pthread_mutex_init(&sys->philos[i].mutex_fork,NULL);
+        i++;
     }
 }
 
-t_sys *system_init(int argc, char **argv)
+t_sys *system_init(char **argv)
 {
     t_sys *sys;
 

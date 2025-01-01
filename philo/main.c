@@ -6,7 +6,7 @@ int main(int argc, char **argv)
     t_sys *sys;
     if (argc != 5 && argc != 6)
         system_exit(NULL, E_ARGS);
-    sys = system_init(argc, argv);
+    sys = system_init(argv);
     t_map *map = malloc(sizeof(t_map) * sys->number_of_philosophers);
     if (!map)
         system_exit(NULL, E_ALLOCATE);
@@ -19,9 +19,9 @@ int main(int argc, char **argv)
         map[i].id = i;
         map[i].sys = sys;
         //startt_timeはここに設定する方が良いか　todo
-        pthread_create(&sys->philos[i]->thread, NULL, __loop, &map[i]);
-        pthread_detach(sys->philos[i]->thread);
-        pthread_mutex_destroy(&sys->philos[i]->mutex_fork);
+        pthread_create(&sys->philos[i].thread, NULL, __loop, &map[i]);
+        pthread_detach(sys->philos[i].thread);
+       // pthread_mutex_destroy(&sys->philos[i].mutex_fork);
         i++;
     }
     pthread_detach(sys->daemon);

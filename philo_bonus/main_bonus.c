@@ -9,7 +9,7 @@ int main(int argc, char **argv)
     t_sys *sys;
     if (argc != 5 && argc != 6)
         system_exit(NULL, E_ARGS);
-    sys = system_init(argc, argv);
+    sys = system_init(argv);
 
     sem_init(&sys->sem_fork, 0, sys->number_of_philosophers);
     int i = 0;

@@ -31,6 +31,9 @@ typedef struct s_sys
     long long		last_meal_time;
     int             number_of_times_to_eat;
     pthread_t        daemon_thread;
+    pthread_mutex_t	mutex_log;
+
+
     pid_t        *philo_pid;
     int number_of_philosophers;
     int time_to_die;
@@ -46,7 +49,7 @@ typedef struct s_sys
 
 
 void system_exit(t_sys *sys, int status);
-t_sys *system_init(int argc, char **argv);
+t_sys *system_init(char **argv);
 
 void   *__daemon(void *void_sys);
 

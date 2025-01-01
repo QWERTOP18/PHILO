@@ -10,9 +10,11 @@ void	thinking(int id, t_sys *sys);
 
 void	*__loop(t_sys *sys)
 {
-	// if (map->id % 2 == 0)
-	// 	usleep(10);
+	sys->start_time = fetch_time();
 	pthread_create(&sys->daemon_thread, NULL, __daemon, sys);
+	pthread_mutex_init(&sys->mutex_log,NULL);
+	if (sys->id % 2 == 0)
+		usleep(10);
 	while (1)
 	{
 		praying(sys->id, sys);

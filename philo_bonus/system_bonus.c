@@ -24,16 +24,9 @@ void system_exit(t_sys *sys, int status)
 }
 
 
-t_sys *system_init(int argc, char **argv)
+t_sys *system_init(char **argv)
 {
-    #ifdef LOG
-    printf("%s\n",__func__);
-    #endif
-
     t_sys *sys;
-
-    sys = NULL;
-
     sys = (t_sys *)malloc(sizeof(t_sys));
     if (!sys)
         system_exit(sys, E_ALLOCATE);
@@ -54,8 +47,5 @@ t_sys *system_init(int argc, char **argv)
         system_exit(sys, E_ALLOCATE);
     
     sys->start_time = fetch_time();
-    #ifdef LOG
-    printf("%s done\n",__func__);
-    #endif
     return sys;
 }

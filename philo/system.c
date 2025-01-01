@@ -7,23 +7,31 @@
 
 void system_exit(t_sys *sys, int status)
 {
-    // int i = 0;
-    // if (sys && sys->philos)
-    // {
-    //     // pthread_mutex_destroy
-    //     // while (sys->philos[i])
-    //     // {
-    //     //     free(sys->philos[i]);
-    //     //     sys->philos[i] = NULL;
-    //     //     i++;
-    //     // }
-    //     free(sys->philos);
-    //     sys->philos = NULL;
-    // }
+    if (sys && sys->philos)
+    {
+        free(sys->philos);
+    }
     free(sys);
     if(status)
         printf("Error\n");
     exit(status);
+}
+
+
+void system_wait(t_sys *sys)
+{
+    int i;
+    i = 0;
+    printf("Waiting\n");
+    while (i < sys->number_of_philosophers)
+    {
+        usleep(100);
+        pthread_mutex_destroy(&sys->philos[i].mutex_fork);
+        pthread_detach(sys->philos[i].thread);
+        i++;
+    }    
+    pthread_join(sys->daemon,NULL);
+    pthread_mutex_destroy(&sys->mutex_log);
 }
 
 void philo_init(int num, t_sys *sys)

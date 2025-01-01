@@ -1,6 +1,7 @@
 #include "system.h"
 
 
+
 int main(int argc, char **argv)
 {
     t_sys *sys;
@@ -18,14 +19,12 @@ int main(int argc, char **argv)
     {
         map[i].id = i;
         map[i].sys = sys;
-        //startt_timeはここに設定する方が良いか　todo
         pthread_create(&sys->philos[i].thread, NULL, __loop, &map[i]);
-        pthread_detach(sys->philos[i].thread);
-       // pthread_mutex_destroy(&sys->philos[i].mutex_fork);
+
         i++;
     }
-    pthread_detach(sys->daemon);
-    pthread_mutex_destroy(&sys->mutex_log);
+    
+    system_wait(sys);
     free(map);
     system_exit(sys, 0);
 }

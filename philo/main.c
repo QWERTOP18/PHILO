@@ -1,8 +1,6 @@
 #include "system.h"
 
 
-
-
 int main(int argc, char **argv)
 {
     t_sys *sys;
@@ -10,15 +8,12 @@ int main(int argc, char **argv)
         system_exit(NULL, E_ARGS);
     sys = system_init(argc, argv);
     t_map *map = malloc(sizeof(t_map) * sys->number_of_philosophers);
+    if (!map)
+        system_exit(NULL, E_ALLOCATE);
 
-    // Start the simulation
-
-     #ifdef LOG
-    printf("main simulation\n");
-    #endif
-    int i = 0;
-    pthread_t daemon_thread;
-    pthread_create(&daemon_thread, NULL, __daemon, sys);
+    int i;
+    i = 0;
+    pthread_create(&sys->daemon ,NULL, __daemon, sys);
     while (i < sys->number_of_philosophers)
     {
         map[i].id = i;
@@ -26,22 +21,11 @@ int main(int argc, char **argv)
         //startt_timeはここに設定する方が良いか　todo
         pthread_create(&sys->philos[i]->thread, NULL, __loop, &map[i]);
         pthread_detach(sys->philos[i]->thread);
+        pthread_mutex_destroy(&sys->philos[i]->mutex_fork);
         i++;
     }
-    #ifdef LOG
-    printf("main done\n");
-    #endif
-    i = 0;
-    // while (i < sys->number_of_philosophers)
-    // {
-    //     pthread_join(sys->philos[i]->thread, NULL);
-    //     i++;
-    // }
-    pthread_detach(daemon_thread);
+    pthread_detach(sys->daemon);
+    pthread_mutex_destroy(&sys->mutex_log);
     free(map);
-    #ifdef LOG
-    printf("main done\n");
-    #endif
     system_exit(sys, 0);
-    return 0;
 }

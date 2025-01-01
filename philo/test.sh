@@ -1,11 +1,5 @@
 #!/bin/bash
 
-CC="cc -fsanitize=thread"
-DFLAG="-DLOG"
-
-$CC *.c $DFLAG -o philo
-
-
 echo "Please choose a test case:"
 select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
     case $option in

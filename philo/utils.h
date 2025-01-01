@@ -4,6 +4,7 @@
 
 #include "system.h"
 #include <sys/time.h>
+#include "unistd.h"
 int	fetch_number(const char *str, t_sys *sys);
 
 long long	fetch_time(void);

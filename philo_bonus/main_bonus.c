@@ -25,16 +25,15 @@ int main(int argc, char **argv)
     }
     i = 0;
     int status = 0;
+ 
     while (i < sys->number_of_philosophers)
     {
-        waitpid(sys->philo_pid[i], &status, 0);
+        waitpid(-1, &status, 0); 
+
         if (status)
-        {
-            philo_log(i+1,"died",sys);
             break;
-        }
-        i++;
     }
+
     sem_close(sys->sem_fork);
     sem_unlink("/fork_semaphore");
     system_exit(sys, 0);

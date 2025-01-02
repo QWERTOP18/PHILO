@@ -39,7 +39,7 @@ void    philo_log(int id, const char *msg, t_sys *sys)
     long long    time;
 
     time = fetch_time() - sys->start_time;
-    printf("%lld\t%d\t%s\n", time, id, msg);
+    printf("%lld %d %s\n", time, id, msg);
 }
 
 void well_sleep(int time)
@@ -48,5 +48,5 @@ void well_sleep(int time)
 
     start_time = fetch_time();
     while (fetch_time() - start_time < time)
-        usleep(10);
+        usleep(50);
 }

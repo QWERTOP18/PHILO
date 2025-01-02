@@ -11,19 +11,15 @@ int check_is_satisfy(t_sys *sys);
 void   *__daemon(void *void_sys)
 {
     t_sys *sys = (t_sys *)void_sys;
-    while (1)
+    if (check_is_satisfy(sys))
+        exit(0);
+    if (check_is_dead(sys))
     {
-
-        if (check_is_satisfy(sys))
-            exit(0);
-        if (check_is_dead(sys))
-        {
-            philo_log(sys->id+1,"died",sys);
-            exit(1);
-        }
-        
+        printf(BG_MAGENTA);
+        philo_log(sys->id+1,"died",sys);
+        printf(RESET);
+        exit(1);
     }
-    return NULL;
 }
 
 

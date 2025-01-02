@@ -11,8 +11,8 @@ void	thinking(int id, t_sys *sys);
 void	*__loop(void *void_map)
 {
 	t_map *map = (t_map *)void_map;
-	// map->sys->philos[map->id]->last_meal_time = fetch_time();
-	if (map->id % 2 == 0)
+	//map->sys->philos[map->id].last_meal_time = fetch_time();
+	if (map->id % 2 == 1)
 		usleep(10);
 
 	while (1)

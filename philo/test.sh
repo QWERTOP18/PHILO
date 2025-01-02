@@ -22,8 +22,8 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
             # 310     1       died
             ;;
         "Test Case 2")
-            echo "Running Test Case 2..."
-            ./philo 7 8 6 40 30
+            echo "no one should not die"
+            ./philo 4 410 200 200 10
             break
             ;;
         "Test Case 3")

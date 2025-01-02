@@ -48,5 +48,5 @@ void well_sleep(int time)
 
     start_time = fetch_time();
     while (fetch_time() - start_time < time)
-        usleep(30);
+        usleep(10);
 }

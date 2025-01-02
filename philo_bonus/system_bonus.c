@@ -13,7 +13,7 @@ void system_exit(t_sys *sys, int status)
     {
         while (i < sys->number_of_philosophers)
         {
-            kill(sys->philo_pid[i],SIGKILL);
+            kill(sys->philo_pid[i++],SIGKILL);
         }
         free(sys->philo_pid);
     }
@@ -45,7 +45,6 @@ t_sys *system_init(char **argv)
     sys->philo_pid = malloc(sys->number_of_philosophers * sizeof (pid_t));
     if (!sys->philo_pid)
         system_exit(sys, E_ALLOCATE);
-    
-    sys->start_time = fetch_time();
+
     return sys;
 }

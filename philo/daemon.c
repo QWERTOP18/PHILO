@@ -35,7 +35,7 @@ int check_is_satisfy(t_sys *sys)
         pthread_mutex_unlock(&sys->mutex_log);
         i++;
     }
-    pthread_mutex_lock(&sys->mutex_log);
+    //pthread_mutex_lock(&sys->mutex_log);
     return 1;
 }
 

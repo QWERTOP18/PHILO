@@ -22,7 +22,6 @@ void system_wait(t_sys *sys)
 {
     int i;
     i = 0;
-    printf("Waiting\n");
     while (i < sys->number_of_philosophers)
     {
         usleep(100);

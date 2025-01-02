@@ -23,12 +23,12 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
             ;;
         "Test Case 2")
             echo "Running Test Case 2..."
-            ./philo_bonus 7 8 6 40 30
+            ./philo_bonus 4 410 200 200
             break
             ;;
         "Test Case 3")
             echo "Running Test Case 3..."
-            ./philo_bonus 1 9 5 10 6
+            ./philo_bonus 1 800 200 200
             break
             ;;
         "Exit")

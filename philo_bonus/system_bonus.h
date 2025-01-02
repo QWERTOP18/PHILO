@@ -41,7 +41,7 @@ typedef struct s_sys
     int time_to_sleep;
     int number_of_times_each_philosopher_must_eat;
     long long start_time;
-    sem_t sem_fork;
+    sem_t *sem_fork;
     sem_t sem_log;
 
 } t_sys;

@@ -11,10 +11,18 @@ void	thinking(int id, t_sys *sys);
 void	*__loop(t_sys *sys)
 {
 	sys->start_time = fetch_time();
-	pthread_create(&sys->daemon_thread, NULL, __daemon, sys);
+    sys->last_meal_time = fetch_time();
+	
 	pthread_mutex_init(&sys->mutex_log,NULL);
-	if (sys->id % 2 == 0)
-		usleep(10);
+
+
+	pthread_create(&sys->daemon_thread, NULL, __daemon, sys);
+	pthread_detach(sys->daemon_thread);
+	if (sys->id % 2 == 1)
+		well_sleep(50);
+
+
+	printf("HIHI");
 	while (1)
 	{
 		praying(sys->id, sys);
@@ -30,32 +38,39 @@ void	*__loop(t_sys *sys)
 /* actuary they look for two mutex_forks */
 void	praying(int id, t_sys *sys)
 {
-    sem_wait(&sys->sem_fork);  
-    sem_wait(&sys->sem_fork);  
+	pthread_mutex_lock(&sys->mutex_log);
+    sem_wait(sys->sem_fork);  
+    sem_wait(sys->sem_fork);  
 	philo_log(id+1, "has taken a fork",sys);
-	
+	pthread_mutex_unlock(&sys->mutex_log);
 }
 
 void	eating(int id, t_sys *sys)
 {
+	pthread_mutex_lock(&sys->mutex_log);
 	philo_log(id+1, "is eating",sys);
 	
 	sys->last_meal_time = fetch_time();
 	sys->number_of_times_to_eat++;
 	
 	well_sleep(sys->time_to_eat);
-	sem_post(&sys->sem_fork);
-	sem_post(&sys->sem_fork);
+	sem_post(sys->sem_fork);
+	sem_post(sys->sem_fork);
+	pthread_mutex_unlock(&sys->mutex_log);
 }
 
 void	sleeping(int id, t_sys *sys)
 {
+	pthread_mutex_lock(&sys->mutex_log);
 	philo_log(id+1, "is sleeping",sys);
 	well_sleep(sys->time_to_sleep);
+	pthread_mutex_unlock(&sys->mutex_log);
 }
 
 void	thinking(int id, t_sys *sys)
 {
+	pthread_mutex_lock(&sys->mutex_log);
 	philo_log(id+1, "is thinking",sys);
+	pthread_mutex_unlock(&sys->mutex_log);
 }
 

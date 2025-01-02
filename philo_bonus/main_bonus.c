@@ -10,8 +10,7 @@ int main(int argc, char **argv)
     if (argc != 5 && argc != 6)
         system_exit(NULL, E_ARGS);
     sys = system_init(argv);
-
-    sem_init(&sys->sem_fork, 0, sys->number_of_philosophers);
+    sys->sem_fork = sem_open("/fork_semaphore", O_CREAT, 0660, sys->number_of_philosophers);
     int i = 0;
     while (i < sys->number_of_philosophers)
     {
@@ -36,10 +35,8 @@ int main(int argc, char **argv)
         }
         i++;
     }
-    sem_destroy(&sys->sem_fork);
-    #ifdef LOG
-    printf("main done\n");
-    #endif
+    sem_close(sys->sem_fork);
+    sem_unlink("/fork_semaphore");
     system_exit(sys, 0);
     return 0;
 }

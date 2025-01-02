@@ -47,10 +47,7 @@ credit:
 	@echo "you will be happy."
 	@echo "If a bad wife,"
 	@echo "you will become a"
-	@echo ""
 	@echo "philosopher"
-	@echo ""
-	@sleep 1
 	@echo ""
 	@echo "except SpouseNotFound"
 	@echo "you shall be a"

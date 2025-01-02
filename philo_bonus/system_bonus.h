@@ -31,7 +31,7 @@ typedef struct s_sys
     long long		last_meal_time;
     int             number_of_times_to_eat;
     pthread_t        daemon_thread;
-    pthread_mutex_t	mutex_log;
+
 
 
     pid_t        *philo_pid;
@@ -42,7 +42,7 @@ typedef struct s_sys
     int number_of_times_each_philosopher_must_eat;
     long long start_time;
     sem_t *sem_fork;
-    sem_t sem_log;
+    sem_t *sem_log;
 
 } t_sys;
 

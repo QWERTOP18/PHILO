@@ -15,6 +15,7 @@ void   *__daemon(void *void_sys)
         exit(0);
     if (check_is_dead(sys))
     {
+        sem_wait(sys->sem_log);
         printf(BG_MAGENTA);
         philo_log(sys->id+1,"died",sys);
         printf(RESET);
@@ -25,19 +26,19 @@ void   *__daemon(void *void_sys)
 
 int check_is_satisfy(t_sys *sys)
 {
-    pthread_mutex_lock(&sys->mutex_log);
+    sem_wait(sys->sem_log);
     int ret = sys->number_of_times_to_eat >= sys->number_of_times_each_philosopher_must_eat;
-    pthread_mutex_unlock(&sys->mutex_log);
+    sem_post(sys->sem_log);
     return ret;
 }
 
 int check_is_dead(t_sys *sys)
 {
     long long elapsed_time;
-    pthread_mutex_lock(&sys->mutex_log);
+    sem_wait(sys->sem_log);
     elapsed_time = fetch_time() - sys->last_meal_time;
     int ret = elapsed_time >= sys->time_to_die;
-    pthread_mutex_unlock(&sys->mutex_log);
+    sem_post(sys->sem_log);
     return ret;
 }
 

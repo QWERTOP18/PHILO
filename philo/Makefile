@@ -2,7 +2,7 @@ NAME    =  ./philo
 CC      =  cc
 FLAGS   =  -Wall -Wextra -Werror#-fsanitize=thread
 HELGRIND = valgrind --tool=helgrind
-VALGRIND = valgrind
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 RED     =  \033[31m
 GREEN   =  \033[32m

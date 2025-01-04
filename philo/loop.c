@@ -13,7 +13,6 @@ void	*__loop(void *void_map)
 	t_map	*map;
 
 	map = (t_map *)void_map;
-	// map->sys->philos[map->id].last_meal_time = fetch_time();
 	if (map->id % 2 == 1)
 		well_sleep(30);
 	while (1)

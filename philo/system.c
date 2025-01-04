@@ -7,12 +7,15 @@ void	system_exit(t_sys *sys, int status)
 {
 	if (sys && sys->philos)
 	{
+		system_wait(sys);
 		free(sys->philos);
 	}
 	free(sys);
 	if (status)
+	{
 		printf("Error\n");
-	exit(status);
+		exit(status);
+	}
 }
 
 void	system_wait(t_sys *sys)
@@ -20,15 +23,14 @@ void	system_wait(t_sys *sys)
 	int	i;
 
 	i = 0;
+	pthread_join(sys->daemon, NULL);
+	pthread_mutex_destroy(&sys->mutex_log);
 	while (i < sys->number_of_philosophers)
 	{
-		usleep(100);
 		// pthread_join(sys->philos[i].thread, NULL);
 		pthread_mutex_destroy(&sys->philos[i].mutex_fork);
 		i++;
 	}
-	pthread_join(sys->daemon, NULL);
-	pthread_mutex_destroy(&sys->mutex_log);
 }
 
 void	philo_init(int num, t_sys *sys)
@@ -44,7 +46,8 @@ void	philo_init(int num, t_sys *sys)
 	{
 		sys->philos[i].last_meal_time = sys->start_time;
 		sys->philos[i].number_of_times_to_eat = 0;
-		pthread_mutex_init(&sys->philos[i].mutex_fork, NULL);
+		if (pthread_mutex_init(&sys->philos[i].mutex_fork, NULL))
+			system_exit(sys, E_MUTEX);
 		i++;
 	}
 }

@@ -12,6 +12,8 @@
 # define E_ALLOCATE 1
 # define E_ARGS 2
 # define E_FILE_READ 3
+# define E_MUTEX 4
+# define E_THREAD 5
 
 typedef struct s_philo
 {
@@ -33,6 +35,7 @@ typedef struct s_sys
 	long long		start_time;
 	pthread_t		daemon;
 	pthread_mutex_t	mutex_log;
+
 }					t_sys;
 
 typedef struct s_map

@@ -13,16 +13,18 @@ int	main(int argc, char **argv)
 	if (!map)
 		system_exit(NULL, E_ALLOCATE);
 	i = 0;
-	pthread_create(&sys->daemon, NULL, __daemon, sys);
+	if (pthread_create(&sys->daemon, NULL, __daemon, sys))
+		system_exit(sys, E_THREAD);
 	while (i < sys->number_of_philosophers)
 	{
 		map[i].id = i;
 		map[i].sys = sys;
-		pthread_create(&sys->philos[i].thread, NULL, __loop, &map[i]);
+		if (pthread_create(&sys->philos[i].thread, NULL, __loop, &map[i]))
+			system_exit(sys, E_THREAD);
 		pthread_detach(sys->philos[i].thread);
 		i++;
 	}
-	system_wait(sys);
-	free(map);
 	system_exit(sys, 0);
+	free(map);
+	return (0);
 }

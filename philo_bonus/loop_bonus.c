@@ -14,7 +14,7 @@ void	*__loop(t_sys *sys)
 	sys->last_meal_time = fetch_time();
 	pthread_mutex_init(&sys->mutex_log, NULL);
 	pthread_create(&sys->daemon_thread, NULL, __daemon, sys);
-	pthread_detach(sys->daemon_thread);
+	// pthread_detach(sys->daemon_thread);
 	if (sys->id % 2 == 1)
 		well_sleep(50);
 	while (1)

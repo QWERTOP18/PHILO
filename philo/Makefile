@@ -1,6 +1,8 @@
 NAME    =  ./philo
 CC      =  cc
-FLAGS   =  -Wall -Wextra -fsanitize=thread
+FLAGS   =  -Wall -Wextra -Werror#-fsanitize=thread
+HELGRIND = valgrind --tool=helgrind
+VALGRIND = valgrind
 
 RED     =  \033[31m
 GREEN   =  \033[32m
@@ -25,7 +27,16 @@ $(NAME): $(OBJ)
 
 run: $(NAME)
 	@echo "$(BLUE)Running $(NAME)...$(RESET)"
-	./$(NAME) 2 2 2 2 2
+	./$(NAME) 4 310 200 100
+
+val: $(NAME)
+	@echo "$(BLUE)Running $(NAME) with Valgrind...$(RESET)"
+	$(VALGRIND) $(NAME) 5 310 200 100 
+
+
+hel: $(NAME)
+	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"
+	$(HELGRIND) $(NAME) 5 310 200 100 
 
 clean:
 	@echo "$(MAGENTA)Cleaning up object files...$(RESET)"
@@ -37,21 +48,5 @@ fclean: clean
 
 re: fclean all
 
-all: credit $(NAME)
+all: $(NAME)
 
-credit:
-
-	@echo 'Try'
-	@echo "Marry()"
-	@echo "If you marry a good wife,"
-	@echo "you will be happy."
-	@echo "If a bad wife,"
-	@echo "you will become a"
-	@echo ""
-	@echo "philosopher"
-	@echo ""
-	@sleep 1
-	@echo ""
-	@echo "except SpouseNotFound"
-	@echo "you shall be a"
-	@echo "Hacker!"

@@ -5,7 +5,7 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
     case $option in
         "Test Case 1")
             echo "Running Test Case 1..."
-            ./philo_bonus 4 310 200 100 
+            ./philo_bonus 4 310 200 100 1
             break
             # 0       1       has taken a fork
             # 0       1       is eating

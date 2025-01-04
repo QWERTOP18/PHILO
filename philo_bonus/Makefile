@@ -3,7 +3,7 @@ CC      =  cc
 FLAGS   =  -Wall -Wextra #-fsanitize=thread
 
 HELGRIND = valgrind --tool=helgrind
-VALGRIND = valgrind
+VALGRIND = valgrind 
 
 RED     =  \033[31m
 GREEN   =  \033[32m

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   system_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/04 20:24:34 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/01/04 20:24:36 by ymizukam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "system_bonus.h"
 #include "utils_bonus.h"
 #include <limits.h>
@@ -36,10 +48,9 @@ t_sys	*system_init(char **argv)
 	sys->time_to_eat = fetch_number(*++argv, sys);
 	sys->time_to_sleep = fetch_number(*++argv, sys);
 	if (*++argv)
-		sys->number_of_times_each_philosopher_must_eat = fetch_number(*argv,
-				sys);
+		sys->number_of_times_each_must_eat = fetch_number(*argv, sys);
 	else
-		sys->number_of_times_each_philosopher_must_eat = INT_MAX;
+		sys->number_of_times_each_must_eat = INT_MAX;
 
 	sys->philo_pid = malloc(sys->number_of_philosophers * sizeof(pid_t));
 	if (!sys->philo_pid)

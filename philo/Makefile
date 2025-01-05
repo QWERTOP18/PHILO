@@ -1,6 +1,6 @@
 NAME    =  ./philo
 CC      =  cc
-FLAGS   =  -Wall -Wextra -Werror#-fsanitize=thread
+FLAGS   =  -Wall -Wextra -Werror #-fsanitize=thread
 HELGRIND = valgrind --tool=helgrind
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 
@@ -27,16 +27,16 @@ $(NAME): $(OBJ)
 
 run: $(NAME)
 	@echo "$(BLUE)Running $(NAME)...$(RESET)"
-	./$(NAME) 4 310 200 100
+	setarch $(uname -m) -R  ./$(NAME) 4 310 200 100
 
 val: $(NAME)
 	@echo "$(BLUE)Running $(NAME) with Valgrind...$(RESET)"
-	$(VALGRIND) $(NAME) 5 310 200 100 
+	$(VALGRIND) $(NAME) 4 310 200 100
 
 
 hel: $(NAME)
 	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"
-	$(HELGRIND) $(NAME) 5 310 200 100 
+	$(HELGRIND) $(NAME) 4 310 200 100
 
 clean:
 	@echo "$(MAGENTA)Cleaning up object files...$(RESET)"

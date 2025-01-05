@@ -6,15 +6,16 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:24:59 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/04 20:24:59 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:41:56 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef UTILS_BONUS_H
+# define UTILS_BONUS_H
 
 # include "system_bonus.h"
 # include <sys/time.h>
+
 int			fetch_number(const char *str, t_sys *sys);
 
 long long	fetch_time(void);

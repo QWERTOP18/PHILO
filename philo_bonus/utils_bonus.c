@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:24:55 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/04 20:24:56 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:42:03 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	philo_log(int id, const char *msg, t_sys *sys)
 
 void	well_sleep(int time)
 {
-	long long start_time;
+	long long	start_time;
 
 	start_time = fetch_time();
 	while (fetch_time() - start_time < time)

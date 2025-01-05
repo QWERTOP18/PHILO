@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   system.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 19:39:45 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/01/05 19:44:31 by ymizukam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "system.h"
 #include "utils.h"
 #include <limits.h>
@@ -27,11 +39,11 @@ void	system_wait(t_sys *sys)
 	pthread_mutex_destroy(&sys->mutex_log);
 	while (i < sys->number_of_philosophers)
 	{
-		// pthread_join(sys->philos[i].thread, NULL);
 		pthread_mutex_destroy(&sys->philos[i].mutex_fork);
 		i++;
 	}
 }
+// pthread_join(sys->philos[i].thread, NULL);
 
 void	philo_init(int num, t_sys *sys)
 {
@@ -67,10 +79,9 @@ t_sys	*system_init(char **argv)
 	sys->time_to_eat = fetch_number(*++argv, sys);
 	sys->time_to_sleep = fetch_number(*++argv, sys);
 	if (*++argv)
-		sys->number_of_times_each_philosopher_must_eat = fetch_number(*argv,
-				sys);
+		sys->number_of_times_each_must_eat = fetch_number(*argv, sys);
 	else
-		sys->number_of_times_each_philosopher_must_eat = INT_MAX;
+		sys->number_of_times_each_must_eat = INT_MAX;
 	sys->start_time = fetch_time();
 	philo_init(sys->number_of_philosophers, sys);
 	pthread_mutex_init(&sys->mutex_log, NULL);

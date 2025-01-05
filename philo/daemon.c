@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:53:19 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/04 20:53:20 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:00:25 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ void	*__daemon(void *void_sys)
 int	check_is_satisfy(t_sys *sys)
 {
 	int	i;
+	int	max_ct;
 
 	i = 0;
+	max_ct = sys->number_of_times_each_must_eat;
 	while (i < sys->number_of_philosophers)
 	{
 		pthread_mutex_lock(&sys->mutex_log);
-		if (sys->philos[i].number_of_times_to_eat < sys->number_of_times_each_philosopher_must_eat)
+		if (sys->philos[i].number_of_times_to_eat < max_ct)
 		{
 			pthread_mutex_unlock(&sys->mutex_log);
 			return (0);
@@ -47,9 +49,9 @@ int	check_is_satisfy(t_sys *sys)
 		pthread_mutex_unlock(&sys->mutex_log);
 		i++;
 	}
-	// pthread_mutex_lock(&sys->mutex_log);
 	return (1);
 }
+// pthread_mutex_lock(&sys->mutex_log);
 
 int	check_is_dead(t_sys *sys)
 {
@@ -64,8 +66,7 @@ int	check_is_dead(t_sys *sys)
 		if (elapsed_time >= sys->time_to_die)
 		{
 			printf(BG_RED);
-			philo_log(i + 1, "died", sys);
-			printf(RESET);
+			philo_log(i + 1, "died" RESET, sys);
 			return (1);
 		}
 		pthread_mutex_unlock(&sys->mutex_log);

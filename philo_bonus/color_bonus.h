@@ -6,12 +6,12 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:25:14 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/04 20:25:14 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:40:50 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef COLOR_BONUS_H
+# define COLOR_BONUS_H
 
 # define RESET "\033[0m"
 # define RED "\033[31m"

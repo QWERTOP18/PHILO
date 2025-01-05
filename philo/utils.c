@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 19:39:59 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/01/05 19:42:11 by ymizukam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils.h"
 #include <limits.h>
 
@@ -43,7 +55,7 @@ void	philo_log(int id, const char *msg, t_sys *sys)
 
 void	well_sleep(int time)
 {
-	long long start_time;
+	long long	start_time;
 
 	start_time = fetch_time();
 	while (fetch_time() - start_time < time)

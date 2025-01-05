@@ -28,7 +28,8 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
             ;;
         "Test Case 3")
             echo "Running Test Case 3..."
-            ./philo 1 9 5 10 6
+            echo "4 310 200 100 1"
+            ./philo 1 800 200 200
             break
             ;;
         "Exit")

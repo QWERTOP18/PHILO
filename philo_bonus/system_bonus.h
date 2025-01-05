@@ -6,12 +6,12 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:25:03 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/04 20:25:03 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:21:40 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SYSTEM_H
-# define SYSTEM_H
+#ifndef SYSTEM_BONUS_H
+# define SYSTEM_BONUS_H
 
 # include <errno.h>
 # include <fcntl.h>
@@ -29,6 +29,7 @@
 # define E_ALLOCATE 1
 # define E_ARGS 2
 # define E_FILE_READ 3
+# define E_SEM_OPEN 4
 
 typedef struct s_sys
 {
@@ -51,6 +52,8 @@ typedef struct s_sys
 
 void			system_exit(t_sys *sys, int status);
 t_sys			*system_init(char **argv);
+
+int				system_wait(t_sys *sys);
 
 void			*__daemon(void *void_sys);
 

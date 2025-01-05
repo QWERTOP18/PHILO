@@ -1,9 +1,9 @@
 NAME    =  ./philo_bonus
 CC      =  cc
-FLAGS   =  -Wall -Wextra #-fsanitize=thread
+FLAGS   =  -Wall -Wextra -Werror #-fsanitize=thread
 
-HELGRIND = valgrind --tool=helgrind
-VALGRIND = valgrind 
+HELGRIND = valgrind --tool=helgrind -q
+VALGRIND = valgrind  --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 RED     =  \033[31m
 GREEN   =  \033[32m
@@ -28,7 +28,7 @@ $(NAME): $(OBJ)
 
 run: $(NAME)
 	@echo "$(BLUE)Running $(NAME)...$(RESET)"
-	./$(NAME) 4 310 200 100 
+	setarch $(uname -m) -R ./$(NAME) 4 310 200 100 
 
 clean:
 	@echo "$(MAGENTA)Cleaning up object files...$(RESET)"

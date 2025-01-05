@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   system.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 19:39:54 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/01/05 19:45:43 by ymizukam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SYSTEM_H
 # define SYSTEM_H
 
@@ -31,7 +43,7 @@ typedef struct s_sys
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				number_of_times_each_philosopher_must_eat;
+	int				number_of_times_each_must_eat;
 	long long		start_time;
 	pthread_t		daemon;
 	pthread_mutex_t	mutex_log;

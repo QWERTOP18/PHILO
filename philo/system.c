@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:45 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 19:44:31 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:45:15 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	system_wait(t_sys *sys)
 
 	i = 0;
 	pthread_join(sys->daemon, NULL);
-	pthread_mutex_destroy(&sys->mutex_log);
 	while (i < sys->number_of_philosophers)
 	{
 		pthread_mutex_destroy(&sys->philos[i].mutex_fork);
 		i++;
 	}
+	pthread_mutex_destroy(&sys->mutex_log);
 }
 // pthread_join(sys->philos[i].thread, NULL);
 

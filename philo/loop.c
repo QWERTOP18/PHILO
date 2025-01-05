@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:28 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 19:39:28 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:44:08 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	*__loop(void *void_map)
 		sleeping(map->id, map->sys);
 		thinking(map->id, map->sys);
 	}
+	pthread_mutex_unlock(&map->sys->philos[map->id].mutex_fork);
 	return (NULL);
 }
 

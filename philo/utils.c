@@ -45,12 +45,14 @@ long long	fetch_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void	philo_log(int id, const char *msg, t_sys *sys)
+int	philo_log(int id, const char *msg, t_sys *sys)
 {
 	long long	time;
-
+	if (sys->is_sim_end)
+		return 1;
 	time = fetch_time() - sys->start_time;
 	printf("%lld %d %s\n", time, id, msg);
+	return 0;
 }
 
 void	well_sleep(int time)

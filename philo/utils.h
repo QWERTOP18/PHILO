@@ -23,6 +23,6 @@ long long	fetch_time(void);
 
 void		well_sleep(int time);
 
-void		philo_log(int id, const char *msg, t_sys *sys);
+int		philo_log(int id, const char *msg, t_sys *sys);
 
 #endif

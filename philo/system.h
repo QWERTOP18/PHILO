@@ -47,7 +47,7 @@ typedef struct s_sys
 	long long		start_time;
 	pthread_t		daemon;
 	pthread_mutex_t	mutex_log;
-
+	int				is_sim_end;
 }					t_sys;
 
 typedef struct s_map
@@ -56,7 +56,7 @@ typedef struct s_map
 	t_sys			*sys;
 }					t_map;
 
-void				system_exit(t_sys *sys, int status);
+int				system_exit(t_sys *sys, int status);
 t_sys				*system_init(char **argv);
 
 void				system_wait(t_sys *sys);

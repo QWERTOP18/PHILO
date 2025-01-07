@@ -15,7 +15,7 @@
 #include <limits.h>
 #include <string.h>
 
-void	system_exit(t_sys *sys, int status)
+int	system_exit(t_sys *sys, int status)
 {
 	if (sys && sys->philos)
 	{
@@ -26,9 +26,11 @@ void	system_exit(t_sys *sys, int status)
 	if (status)
 	{
 		printf("Error\n");
-		exit(status);
+		
 	}
+	return (status);
 }
+////exit(status);
 
 void	system_wait(t_sys *sys)
 {
@@ -70,11 +72,11 @@ t_sys	*system_init(char **argv)
 
 	sys = (t_sys *)malloc(sizeof(t_sys));
 	if (!sys)
-		system_exit(NULL, E_ALLOCATE);
+		return(system_exit(NULL, E_ALLOCATE), NULL);
 	memset(sys, 0, sizeof(t_sys));
 	sys->number_of_philosophers = fetch_number(*++argv, sys);
 	if (sys->number_of_philosophers == 0)
-		system_exit(sys, E_ALLOCATE);
+		return(system_exit(sys, E_ALLOCATE),NULL);
 	sys->time_to_die = fetch_number(*++argv, sys);
 	sys->time_to_eat = fetch_number(*++argv, sys);
 	sys->time_to_sleep = fetch_number(*++argv, sys);

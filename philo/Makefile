@@ -1,6 +1,6 @@
 NAME    =  ./philo
 CC      =  cc
-FLAGS   =  -Wall -Wextra -Werror -pthread#-fsanitize=thread
+FLAGS   =  -Wall -Wextra -Werror -pthread -fsanitize=thread
 HELGRIND = valgrind --tool=helgrind
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 

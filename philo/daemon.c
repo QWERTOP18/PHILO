@@ -24,10 +24,12 @@ void	*__daemon(void *void_sys)
 	sys = (t_sys *)void_sys;
 	while (1)
 	{
-		if (check_is_satisfy(sys))
+		if (check_is_satisfy(sys) || check_is_dead(sys))
+		{
+			sys->is_sim_end = 1;
+			//pthread_mutex_unlock(&sys->mutex_log);
 			return (NULL);
-		if (check_is_dead(sys))
-			return (NULL);
+		}
 	}
 }
 
@@ -49,9 +51,11 @@ int	check_is_satisfy(t_sys *sys)
 		pthread_mutex_unlock(&sys->mutex_log);
 		i++;
 	}
+	pthread_mutex_lock(&sys->mutex_log);
+
 	return (1);
 }
-// pthread_mutex_lock(&sys->mutex_log);
+
 
 int	check_is_dead(t_sys *sys)
 {

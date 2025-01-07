@@ -21,9 +21,11 @@ int	main(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 		system_exit(NULL, E_ARGS);
 	sys = system_init(argv);
+	if (!sys)
+		return(E_ALLOCATE);
 	map = malloc(sizeof(t_map) * sys->number_of_philosophers);
 	if (!map)
-		system_exit(NULL, E_ALLOCATE);
+		return(system_exit(NULL, E_ALLOCATE));
 	i = 0;
 	if (pthread_create(&sys->daemon, NULL, __daemon, sys))
 		system_exit(sys, E_THREAD);
@@ -32,7 +34,7 @@ int	main(int argc, char **argv)
 		map[i].id = i;
 		map[i].sys = sys;
 		if (pthread_create(&sys->philos[i].thread, NULL, __loop, &map[i]))
-			system_exit(sys, E_THREAD);
+			return(system_exit(sys, E_THREAD));
 		pthread_detach(sys->philos[i].thread);
 		i++;
 	}
@@ -40,3 +42,4 @@ int	main(int argc, char **argv)
 	free(map);
 	return (0);
 }
+

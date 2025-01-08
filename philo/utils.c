@@ -6,14 +6,14 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:59 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 19:57:33 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 23:03:50 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <limits.h>
 
-int	fetch_number(const char *str, t_sys *sys)
+int	fetch_number(const char *str)
 {
 	int			i;
 	long long	result;
@@ -23,17 +23,17 @@ int	fetch_number(const char *str, t_sys *sys)
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-')
-		system_exit(sys, E_ARGS);
+		return (-1);
 	if (str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i++] - '0');
 		if (result > INT_MAX)
-			system_exit(sys, E_ARGS);
+			return (-1);
 	}
 	if (str[i] != '\0')
-		system_exit(sys, E_ARGS);
+		return (-1);
 	return ((int)result);
 }
 
@@ -62,5 +62,14 @@ void	well_sleep(int time)
 
 	start_time = fetch_time();
 	while (fetch_time() - start_time < time)
-		usleep(50);
+		usleep(20);
+}
+
+int	validate(t_sys *sys)
+{
+	if (sys->number_of_philosophers <= 0 || sys->time_to_die <= 0
+		|| sys->time_to_eat <= 0 || sys->time_to_sleep <= 0
+		|| sys->number_of_times_each_must_eat <= 0)
+		return (0);
+	return (1);
 }

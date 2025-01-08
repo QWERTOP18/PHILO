@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:40:02 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 19:57:39 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:21:41 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 # include "unistd.h"
 # include <sys/time.h>
 
-int			fetch_number(const char *str, t_sys *sys);
+int			fetch_number(const char *str);
 
 long long	fetch_time(void);
 
 void		well_sleep(int time);
 
 int			philo_log(int id, const char *msg, t_sys *sys);
+
+int			validate(t_sys *sys);
 
 #endif

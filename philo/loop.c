@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:28 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 19:56:31 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 23:10:35 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	*__loop(void *void_map)
 	id = ((t_map *)void_map)->id;
 	nid = (id + 1) % sys->number_of_philosophers;
 	if (id % 2 == 1)
-		well_sleep(30);
+		well_sleep(20 * id);
 	while (1)
 	{
 		if (praying(id, sys) || eating(id, sys))
 		{
-			pthread_mutex_unlock(&sys->philos[id].mutex_fork);
 			pthread_mutex_unlock(&sys->philos[nid].mutex_fork);
+			pthread_mutex_unlock(&sys->philos[id].mutex_fork);
 			pthread_mutex_unlock(&sys->mutex_log);
 			return (NULL);
 		}
@@ -78,14 +78,14 @@ int	eating(int id, t_sys *sys)
 
 	nid = (id + 1) % sys->number_of_philosophers;
 	pthread_mutex_lock(&sys->mutex_log);
-	if (philo_log(id + 1, "is eating", sys))
+	if (philo_log(id + 1, CYAN "is eating" RESET, sys))
 		return (1);
 	sys->philos[id].last_meal_time = fetch_time();
 	sys->philos[id].number_of_times_to_eat++;
 	pthread_mutex_unlock(&sys->mutex_log);
 	well_sleep(sys->time_to_eat);
-	pthread_mutex_unlock(&sys->philos[id].mutex_fork);
 	pthread_mutex_unlock(&sys->philos[nid].mutex_fork);
+	pthread_mutex_unlock(&sys->philos[id].mutex_fork);
 	return (0);
 }
 

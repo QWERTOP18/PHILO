@@ -1,8 +1,8 @@
 NAME    =  ./philo
 CC      =  cc
-FLAGS   =  -Wall -Wextra -Werror -pthread #-fsanitize=thread
-HELGRIND = valgrind --tool=helgrind
-VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
+FLAGS   =  -Wall -Wextra -Werror -pthread -fsanitize=thread
+HELGRIND = valgrind --tool=helgrind -q#--history-level=none
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q
 
 RED     =  \033[31m
 GREEN   =  \033[32m
@@ -27,16 +27,23 @@ $(NAME): $(OBJ)
 
 run: $(NAME)
 	@echo "$(BLUE)Running $(NAME)...$(RESET)"
-	setarch $(uname -m) -R  ./$(NAME) 4 310 200 100
+	setarch $(uname -m) -R  $(NAME) 5 800 200 200
+
+
+test:: $(NAME)
+	@echo "$(BLUE)Running $(NAME)...$(RESET)"
+	setarch $(uname -m) -R  $(NAME) 4 310 200 100
+	setarch $(uname -m) -R  $(NAME) 1 800 200 200
+	setarch $(uname -m) -R  $(NAME) 4 410 200 200 5
 
 val: $(NAME)
 	@echo "$(BLUE)Running $(NAME) with Valgrind...$(RESET)"
-	$(VALGRIND) $(NAME) 4 310 200 100
+	$(VALGRIND) setarch $(uname -m) -R $(NAME) 4 310 200 100
 
 
-hel: $(NAME)
-	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"
-	$(HELGRIND) $(NAME) 4 310 200 100
+# hel: $(NAME)
+# 	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"
+# 	$(VALGRIND) setarch $(uname -m) -R $(HELGRIND) $(NAME) 5 800 200 200
 
 clean:
 	@echo "$(MAGENTA)Cleaning up object files...$(RESET)"

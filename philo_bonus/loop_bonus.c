@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:53 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 20:10:23 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:56:15 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*__loop(t_sys *sys)
 	pthread_create(&sys->daemon_thread, NULL, __daemon, sys);
 	pthread_detach(sys->daemon_thread);
 	if (sys->id % 2 == 1)
-		well_sleep(50);
+		well_sleep(10);
 	while (1)
 	{
 		praying(sys->id, sys);

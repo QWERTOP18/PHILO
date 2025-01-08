@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:37 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 20:02:27 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:24:03 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	int		i;
 
 	if (argc != 5 && argc != 6)
-		system_exit(NULL, E_ARGS);
+		return (system_exit(NULL, E_ARGS));
 	sys = system_init(argv);
 	if (!sys)
 		return (0);

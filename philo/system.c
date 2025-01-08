@@ -6,10 +6,11 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:45 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 19:21:55 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:09:59 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "system.h"
 #include "utils.h"
 #include <limits.h>
@@ -52,10 +53,15 @@ void	system_wait(t_sys *sys)
 }
 // pthread_join(sys->philos[i].thread, NULL);
 
-void	philo_init(int num, t_sys *sys)
+int	philo_init(int num, t_sys *sys)
 {
 	int	i;
 
+	if (num == 1)
+	{
+		printf(BG_RED "%d %d %s" RESET "\n", sys->time_to_die, 1, "died");
+		return (0);
+	}
 	sys->philos = malloc(sizeof(t_philo) * (num + 1));
 	if (!sys->philos)
 		system_exit(sys, 1);
@@ -66,9 +72,10 @@ void	philo_init(int num, t_sys *sys)
 		sys->philos[i].last_meal_time = sys->start_time;
 		sys->philos[i].number_of_times_to_eat = 0;
 		if (pthread_mutex_init(&sys->philos[i].mutex_fork, NULL))
-			system_exit(sys, E_MUTEX);
+			return (system_exit(sys, E_MUTEX), 0);
 		i++;
 	}
+	return (1);
 }
 
 t_sys	*system_init(char **argv)
@@ -90,7 +97,8 @@ t_sys	*system_init(char **argv)
 	else
 		sys->number_of_times_each_must_eat = INT_MAX;
 	sys->start_time = fetch_time();
-	philo_init(sys->number_of_philosophers, sys);
+	if (!philo_init(sys->number_of_philosophers, sys))
+		return (NULL);
 	pthread_mutex_init(&sys->mutex_log, NULL);
 	return (sys);
 }

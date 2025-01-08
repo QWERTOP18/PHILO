@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:54 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 19:45:43 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 19:57:25 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_map
 	t_sys			*sys;
 }					t_map;
 
-int				system_exit(t_sys *sys, int status);
+int					system_exit(t_sys *sys, int status);
 t_sys				*system_init(char **argv);
 
 void				system_wait(t_sys *sys);

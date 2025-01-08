@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:59 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 19:42:11 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 19:57:33 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ long long	fetch_time(void)
 int	philo_log(int id, const char *msg, t_sys *sys)
 {
 	long long	time;
+
 	if (sys->is_sim_end)
-		return 1;
+		return (1);
 	time = fetch_time() - sys->start_time;
 	printf("%lld %d %s\n", time, id, msg);
-	return 0;
+	return (0);
 }
 
 void	well_sleep(int time)

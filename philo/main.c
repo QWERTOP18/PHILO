@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:37 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 19:12:46 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:02:27 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		system_exit(NULL, E_ARGS);
 	sys = system_init(argv);
 	if (!sys)
-		return (E_ALLOCATE);
+		return (0);
 	map = malloc(sizeof(t_map) * sys->number_of_philosophers);
 	if (!map)
 		return (system_exit(NULL, E_ALLOCATE));
@@ -35,10 +35,8 @@ int	main(int argc, char **argv)
 		map[i].sys = sys;
 		if (pthread_create(&sys->philos[i].thread, NULL, __loop, &map[i]))
 			return (system_exit(sys, E_THREAD));
-		// pthread_detach(sys->philos[i].thread);
 		i++;
 	}
 	system_exit(sys, 0);
-	free(map);
-	return (0);
+	return (free(map), 0);
 }

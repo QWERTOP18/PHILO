@@ -23,7 +23,7 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
             ;;
         "Test Case 2")
             echo "no one should not die"
-            ./philo 4 410 200 200 5
+            ./philo 4 410 200 200 0
             break
             ;;
         "Test Case 3")

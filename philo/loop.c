@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:28 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 19:29:11 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/08 19:56:31 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	*__loop(void *void_map)
 			return (NULL);
 		}
 	}
-	pthread_mutex_unlock(&sys->philos[id].mutex_fork);
-	return (NULL);
+	return (pthread_mutex_unlock(&sys->philos[id].mutex_fork), NULL);
 }
 
 /* actuary they look for two mutex_forks */

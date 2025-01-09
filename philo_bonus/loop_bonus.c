@@ -6,17 +6,18 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:53 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 22:56:15 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:09:33 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color_bonus.h"
 #include "system_bonus.h"
 #include "utils_bonus.h"
 
-void	praying(int id, t_sys *sys);
-void	eating(int id, t_sys *sys);
-void	sleeping(int id, t_sys *sys);
-void	thinking(int id, t_sys *sys);
+int		praying(int id, t_sys *sys);
+int		eating(int id, t_sys *sys);
+int		sleeping(int id, t_sys *sys);
+int		thinking(int id, t_sys *sys);
 
 void	*__loop(t_sys *sys)
 {
@@ -24,12 +25,15 @@ void	*__loop(t_sys *sys)
 	sys->last_meal_time = fetch_time();
 	pthread_create(&sys->daemon_thread, NULL, __daemon, sys);
 	pthread_detach(sys->daemon_thread);
+	well_sleep(10);
 	if (sys->id % 2 == 1)
-		well_sleep(10);
+		well_sleep(50);
 	while (1)
 	{
-		praying(sys->id, sys);
-		eating(sys->id, sys);
+		if (praying(sys->id, sys) || eating(sys->id, sys))
+		{
+			exit(1);
+		}
 		sleeping(sys->id, sys);
 		thinking(sys->id, sys);
 	}
@@ -37,38 +41,62 @@ void	*__loop(t_sys *sys)
 }
 
 /* actuary they look for two mutex_forks */
-void	praying(int id, t_sys *sys)
+int	praying(int id, t_sys *sys)
 {
+	int	status;
+
+	sem_wait(sys->sem_log);
+	status = sys->status;
+	sem_post(sys->sem_log);
+	if (status == TH_END)
+		return (1);
+	if (status == TH_THINKING)
+		well_sleep(20);
+	if (status == TH_HUNGRY)
+		well_sleep(10);
+	sem_post(sys->sem_log);
 	sem_wait(sys->sem_fork);
 	sem_wait(sys->sem_fork);
 	sem_wait(sys->sem_log);
 	philo_log(id + 1, "has taken a fork", sys);
 	sem_post(sys->sem_log);
+	return (0);
 }
 
-void	eating(int id, t_sys *sys)
+int	eating(int id, t_sys *sys)
 {
 	sem_wait(sys->sem_log);
-	philo_log(id + 1, "is eating", sys);
+	printf(CYAN);
+	philo_log(id + 1, "is eating" RESET, sys);
 	sys->last_meal_time = fetch_time();
 	sys->number_of_times_to_eat++;
 	sem_post(sys->sem_log);
 	well_sleep(sys->time_to_eat);
 	sem_post(sys->sem_fork);
 	sem_post(sys->sem_fork);
+	sem_wait(sys->sem_log);
+	if (sys->status == TH_END)
+	{
+		sem_post(sys->sem_log);
+		return (1);
+	}
+	sem_post(sys->sem_log);
+	return (0);
 }
 
-void	sleeping(int id, t_sys *sys)
+int	sleeping(int id, t_sys *sys)
 {
 	sem_wait(sys->sem_log);
 	philo_log(id + 1, "is sleeping", sys);
 	sem_post(sys->sem_log);
 	well_sleep(sys->time_to_sleep);
+	return (0);
 }
 
-void	thinking(int id, t_sys *sys)
+int	thinking(int id, t_sys *sys)
 {
 	sem_wait(sys->sem_log);
 	philo_log(id + 1, "is thinking", sys);
 	sem_post(sys->sem_log);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:25:03 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 20:21:40 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:59:29 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,23 @@
 # include <time.h>
 # include <unistd.h>
 
+/* ************************************************************************** */
+/*                             exit status                                    */
+/* ************************************************************************** */
+
 # define E_ALLOCATE 1
 # define E_ARGS 2
 # define E_FILE_READ 3
 # define E_SEM_OPEN 4
+# define E_FORK 5
+
+/* ************************************************************************** */
+/*                            philo status                                    */
+/* ************************************************************************** */
+# define TH_THINKING 0
+# define TH_HUNGRY 1
+# define TH_STARVING 2
+# define TH_END 3
 
 typedef struct s_sys
 {
@@ -45,15 +58,24 @@ typedef struct s_sys
 	int			time_to_sleep;
 	int			number_of_times_each_must_eat;
 	long long	start_time;
+	int			status;
 	sem_t		*sem_fork;
 	sem_t		*sem_log;
 
 }				t_sys;
 
+/* ************************************************************************** */
+/*                           system functions                                 */
+/* ************************************************************************** */
+
 void			system_exit(t_sys *sys, int status);
 t_sys			*system_init(char **argv);
 
 int				system_wait(t_sys *sys);
+
+/* ************************************************************************** */
+/*                          callback functions                                */
+/* ************************************************************************** */
 
 void			*__daemon(void *void_sys);
 

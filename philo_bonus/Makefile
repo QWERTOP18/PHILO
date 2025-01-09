@@ -28,7 +28,15 @@ $(NAME): $(OBJ)
 
 run: $(NAME)
 	@echo "$(BLUE)Running $(NAME)...$(RESET)"
-	setarch $(uname -m) -R $(NAME) 4 310 200 100 
+	setarch $(uname -m) -R  $(NAME) 5 800 200 200
+
+
+test:: $(NAME)
+	@echo "$(BLUE)Running $(NAME)...$(RESET)"
+	setarch $(uname -m) -R  $(NAME) 4 310 200 100
+	setarch $(uname -m) -R  $(NAME) 1 800 200 200
+	setarch $(uname -m) -R  $(NAME) 4 410 200 200 4
+	setarch $(uname -m) -R  $(NAME) 4 410 200 200 4 | grep eating | wc -l
 
 clean:
 	@echo "$(MAGENTA)Cleaning up object files...$(RESET)"
@@ -43,9 +51,9 @@ val: $(NAME)
 	setarch $(uname -m) -R $(VALGRIND) $(NAME) 5 310 200 100 
 
 
-hel: $(NAME)
-	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"
-	$(HELGRIND) $(NAME) 5 310 200 100 
+# hel: $(NAME)
+# 	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"
+# 	$(HELGRIND) $(NAME) 5 310 200 100 
 
 
 re: fclean all

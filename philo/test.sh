@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo "Please choose a test case:"
-select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
+select option in "Test Case 1" "Test Case 2" "Test Case 3" "Test Case 4" "Exit"; do
     case $option in
         "Test Case 1")
             echo "Running Test Case 1..."
-            ./philo 4 310 200 100 
+            setarch $(uname -m) -R ./philo 4 310 200 100 
             break
             # 0       1       has taken a fork
             # 0       1       is eating
@@ -23,13 +23,20 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
             ;;
         "Test Case 2")
             echo "no one should not die"
-            ./philo 4 410 200 200 0
+            setarch $(uname -m) -R ./philo 4 410 200 200
             break
             ;;
         "Test Case 3")
             echo "Running Test Case 3..."
             echo "1 800 200 200"
-            ./philo 1 800 200 200
+            setarch $(uname -m) -R ./philo 1 800 200 200
+            break
+            ;;
+
+        "Test Case 4")
+            echo "Running Test Case 3..."
+            echo "5 800 200 200"
+            setarch $(uname -m) -R ./philo 5 800 200 200
             break
             ;;
         "Exit")

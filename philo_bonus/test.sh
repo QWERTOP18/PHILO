@@ -6,7 +6,7 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
         "Test Case 1")
             echo "Running Test Case 1..."
             echo "4 310 200 100 1"
-            ./philo_bonus 4 310 200 100 1
+            setarch $(uname -m) -R  ./philo_bonus 4 310 200 100 1
             break
             # 0       1       has taken a fork
             # 0       1       is eating
@@ -25,13 +25,13 @@ select option in "Test Case 1" "Test Case 2" "Test Case 3" "Exit"; do
         "Test Case 2")
             echo "Running Test Case 2..."
             echo "4 310 200 100 1"
-            ./philo_bonus 4 410 200 200
+            setarch $(uname -m) -R  ./philo_bonus 4 410 200 200
             break
             ;;
         "Test Case 3")
             echo "Running Test Case 3..."
             echo "4 310 200 100 1"
-            ./philo_bonus 1 800 200 200
+            setarch $(uname -m) -R  ./philo_bonus 1 800 200 200
             break
             ;;
         "Exit")

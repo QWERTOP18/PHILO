@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:28 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 23:10:35 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 07:05:09 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	eating(int id, t_sys *sys)
 
 	nid = (id + 1) % sys->number_of_philosophers;
 	pthread_mutex_lock(&sys->mutex_log);
-	if (philo_log(id + 1, CYAN "is eating" RESET, sys))
+	printf(CYAN);
+	if (philo_log(id + 1, "is eating" RESET, sys))
 		return (1);
 	sys->philos[id].last_meal_time = fetch_time();
 	sys->philos[id].number_of_times_to_eat++;

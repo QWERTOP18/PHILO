@@ -35,6 +35,7 @@ test:: $(NAME)
 	setarch $(uname -m) -R  $(NAME) 4 310 200 100
 	setarch $(uname -m) -R  $(NAME) 1 800 200 200
 	setarch $(uname -m) -R  $(NAME) 4 410 200 200 5
+	setarch $(uname -m) -R  $(NAME) 4 410 200 200 5 | grep eating | wc -l
 
 val: $(NAME)
 	@echo "$(BLUE)Running $(NAME) with Valgrind...$(RESET)"

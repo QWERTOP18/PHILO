@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:59 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/05 20:09:32 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:04:54 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "system_bonus.h"
 #include "utils_bonus.h"
 
-int		check_is_dead(t_sys *sys);
+int		check_status(t_sys *sys);
 int		check_is_satisfy(t_sys *sys);
 
 void	*__daemon(void *void_sys)
@@ -26,14 +26,14 @@ void	*__daemon(void *void_sys)
 	{
 		if (check_is_satisfy(sys))
 		{
-			exit(0);
+			return (NULL);
 		}
-		if (check_is_dead(sys))
+		if (check_status(sys))
 		{
 			sem_wait(sys->sem_log);
 			printf(BG_WHITE);
 			philo_log(sys->id + 1, "died" RESET, sys);
-			exit(1);
+			exit(2);
 		}
 	}
 	return (NULL);
@@ -45,11 +45,13 @@ int	check_is_satisfy(t_sys *sys)
 
 	sem_wait(sys->sem_log);
 	ret = sys->number_of_times_to_eat >= sys->number_of_times_each_must_eat;
+	sys->status = ret;
 	sem_post(sys->sem_log);
 	return (ret);
 }
 
-int	check_is_dead(t_sys *sys)
+/* I should handle status but sem_unlink during sem_wait says no error :) */
+int	check_status(t_sys *sys)
 {
 	long long	elapsed_time;
 	int			ret;

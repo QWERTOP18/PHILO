@@ -46,10 +46,10 @@ fclean: clean
 	@echo "$(MAGENTA)Cleaning up executable...$(RESET)"
 	rm -f $(NAME)
 
-val: $(NAME)
-	@echo "$(BLUE)Running $(NAME) with Valgrind...$(RESET)"
-	setarch $(uname -m) -R $(VALGRIND) $(NAME) 5 310 200 100 
-
+# val: $(NAME)
+# 	@echo "$(BLUE)Running $(NAME) with Valgrind...$(RESET)"
+# 	setarch $(uname -m) -R $(VALGRIND) $(NAME) 4 310 200 100 
+#  valgrind  setarch $(uname -m) -R  ./philo_bonus 4 310 200 100 
 
 # hel: $(NAME)
 # 	@echo "$(BLUE)Running $(NAME) with Helgrind...$(RESET)"

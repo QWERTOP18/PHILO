@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:25:03 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/09 09:59:29 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:47:52 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@
 /*                            philo status                                    */
 /* ************************************************************************** */
 # define TH_THINKING 0
-# define TH_HUNGRY 1
+# define TH_HUNGRY 3
 # define TH_STARVING 2
-# define TH_END 3
+# define TH_END 1
 
 typedef struct s_sys
 {

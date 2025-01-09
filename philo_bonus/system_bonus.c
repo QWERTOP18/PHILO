@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:24:34 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/09 09:44:36 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:45:56 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ t_sys	*system_init(char **argv)
 	sys->philo_pid = malloc(sys->number_of_philosophers * sizeof(pid_t));
 	if (!sys->philo_pid)
 		system_exit(sys, E_ALLOCATE);
+	if (!sys->number_of_times_each_must_eat)
+		system_exit(sys, 0);
 	return (sys);
 }

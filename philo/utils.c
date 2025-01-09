@@ -6,10 +6,11 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:39:59 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/01/08 23:03:50 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:41:10 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "color.h"
 #include "utils.h"
 #include <limits.h>
 
@@ -30,10 +31,10 @@ int	fetch_number(const char *str)
 	{
 		result = result * 10 + (str[i++] - '0');
 		if (result > INT_MAX)
-			return (-1);
+			return (printf(RED "invalid input" RESET "\n"), -1);
 	}
 	if (str[i] != '\0')
-		return (-1);
+		return (printf(RED "invalid input" RESET "\n"), -1);
 	return ((int)result);
 }
 
